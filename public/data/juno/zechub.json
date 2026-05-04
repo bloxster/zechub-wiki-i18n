@@ -4,7 +4,7 @@
     "name": "ZecHub",
     "description": "ZecHub provides an open source educational platform where community members can work together on creating, validating, and promoting content that supports the Zcash ecosystem. ZecHub believes:\n\n* Privacy is a human right\n* Education should be open-source and accessible worldwide\n* Community members have a right to earn ZEC privately",
     "member_count": 27,
-    "proposal_count": 145,
+    "proposal_count": 146,
     "config": {
       "name": "ZecHub",
       "dao_uri": null,
@@ -6046,6 +6046,41 @@
         "createdAt": "2026-04-22T15:25:01.443Z",
         "completedAt": "2026-04-29T17:24:33.000Z",
         "closedAt": "2026-04-29T17:24:33.000Z"
+      },
+      {
+        "coreAddress": "juno1nktrulhakwm0n3wlyajpwxyg54n39xx4y8hdaqlty7mymf85vweq7m6t0y",
+        "proposalModuleAddress": "juno14futcfehnc8fn4nz6gtm25svn05mzz09ju8rtj0jvven2hpxj85s0q8a55",
+        "id": 146,
+        "proposal": {
+          "msgs": [],
+          "title": "Zcash Global Ambassador Elzz (May - December 2026)",
+          "votes": {
+            "no": "0",
+            "yes": "0",
+            "abstain": "0"
+          },
+          "status": "open",
+          "proposer": "juno1tldl44lqjdrq6lkcdf5rzxjjddxa6v2wdxafjs",
+          "threshold": {
+            "threshold_quorum": {
+              "quorum": {
+                "percent": "0.4"
+              },
+              "threshold": {
+                "percent": "0.67"
+              }
+            }
+          },
+          "expiration": {
+            "at_time": "1778360571301922564"
+          },
+          "description": "Zcash Ambassador Renewal Proposal\n\nName: Elzz\nRole: Zcash Global Ambassador\nTenure Covered: February – April 2026\n\n**Core Focus**\n\nOver this tenure, my work focused on one clear objective: reducing the gap between awareness of Zcash and actual participation in the ecosystem.\n\nThis was approached through four main vectors:\n- structured onboarding\n- clearer communication of Zcash concepts\n- improving real-world accessibility and expanding Zcash’s presence in high-impact ecosystem environments\n\nRather than treating education as a passive activity, the focus was on creating environments where people could understand, engage and take action.\n\n\n**Key Contributions & Impact**\n\n1. Structured Contributor Onboarding (Workshop Execution)\nIn February, I designed and executed a 3-day Zcash Contributors Workshop aimed at moving participants from curiosity to structured participation.\n\nKey outcomes:\n33 total registrations\n~30 consistent attendees across all 3 days\n~20 new participants introduced to the ecosystem\n6 direct task completions\n\nMore importantly, the workshop addressed a recurring ecosystem issue:\ninterest exists, but direction is unclear. \nBy providing clear pathways for both creative and technical contributors, the initiative improved onboarding clarity and reduced entry friction.\n\n\n2. Regional Accessibility Progress (Pajcash Integration)\nFollowing initial outreach in January, February marked the first successful ZEC off-ramp transaction via Pajcash.\n\nThis represents early but meaningful progress toward:\n- improving local accessibility\n- enabling seamless ZEC ↔ fiat flows within Nigeria\n- supporting real-world usability beyond theory\n\nWhile still in development, this work directly addresses a key barrier to adoption: access.\n\n\n3. Communication & Content Evolution\nAcross the tenure, I refined how I introduced and explained Zcash and privacy to new audiences \n\nKey shifts included:\n- moving from traditional articles to long-form, high-retention content\n- simplifying protocol updates (e.g., NU7) into user-relevant explanations\n- introducing privacy-first narratives to improve onboarding context\n\nThis resulted in:\n- stronger engagement patterns\n- improved clarity for non-technical users\n- more natural entry points into Zcash conversations\n\n\n4. Ecosystem Positioning & Expansion Strategy\nIn March and April, I began executing a shift toward higher-impact ecosystem visibility.\n\nThis included:\n- identifying large, crypto-native environments\n- positioning Zcash within relevant conversations\n- developing and securing external-facing opportunities\n\nThese efforts led to Zcash being represented as a Gold Sponsor at the Women in DeFi Summit 2026, sponsored by Zcash Community Grants.\n\nThis initiative expanded Zcash’s presence into a high-attendance, regionally relevant Web3 environment and enabled direct engagement with new audiences.\n(A detailed breakdown of this initiative will be provided in a separate report.)\n\nThis approach is not a one-off initiative, but a repeatable strategy. High-attendance, crypto-native events provide an environment where awareness, education, and onboarding can happen simultaneously, making them effective channels for accelerating participation within the ecosystem.\n\n\n5. Direct Engagement & Ecosystem Signals\nAcross this tenure, engagement patterns showed:\n- sustained participation from previously onboarded users\n- increased curiosity around privacy as a concept and Zcash's role in financial privacy\n- stronger response to simplified, direct communication\n\nAdditional signals:\n- recognition from ecosystem leaders (e.g. Zooko)\n- engagement from Zcash Foundation\ninbound interest following onboarding and event participation\n- invitations to speak at local and international blockchain events (e.g. ETHWomen, Uniabuja Blockchain Community).\n\nThese indicate that the current approach is not just reaching people, it is converting interest into participation.\n\n\n**What Worked**\n\n- Structured onboarding (workshops): clarity drives participation\n- Privacy-first communication: better entry point for new users\n- Direct engagement (IRL + live sessions): stronger conversion than passive content\n- Ecosystem positioning: exposure in the right environment matters\n\n**What Needs Improvement**\n\n- Post-onboarding conversion (workshop attendance → task completion)\n- Content consistency during high-intensity execution periods\n- Scaling onboarding systems without losing clarity\n\n\n**Past Reports**\n\nA record of my work so far can be found on the Zcash community forum via these links:\n\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-november-2025-report/53601\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-december-2025-report/54021\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-january-2026-report/54522\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-february-2026-report/54839\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-march-2026-report/55181\n\nhttps://forum.zcashcommunity.com/t/global-ambassador-elzz-april-2026-report/55566\n\n\n**Next Tenure Focus**\n\nThe next phase will focus on scaling what already works, not reinventing direction.\n\n1. Expand Structured Onboarding\n- Repeat and refine contributor workshops quarterly \n- Improve follow-up systems to increase execution rates\n\n2. Strengthen Privacy-Led Communication\n- Continue simplifying protocol updates\n- Build stronger narrative bridges from privacy to Zcash\n\n3. Event-Led Onboarding & Ecosystem Expansion\n- Leverage high-attendance blockchain events as onboarding environments\n- Represent Zcash through talks, panels, and direct engagement\n- Convert event visibility into active users, contributors, and builders\n- Build repeatable structures for event-based onboarding and follow-up\n\n\n4. Improve Regional Accessibility\n- Support continued development and activation of Pajcash integration\n- Explore additional local access opportunities where relevant\n- Represent Zcash at relevant regional blockchain events\n\n\n**Budget**\n\nMaintaining previous budget:\n$1000/month\n\nThis supports:\n- continued onboarding initiatives\n- content and engagement activities\n- ongoing community activation\n\n\n**Conclusion**\n\nThis tenure reinforced a clear insight:\nawareness alone is not enough, participation is the real driver of adoption.\n\nThrough structured onboarding, improved communication, and direct engagement, this work has focused on turning curiosity into real involvement.\n\nEvent-led onboarding has emerged as a high-impact channel for introducing Zcash to new audiences and driving real participation.\n\nThe next phase is about scaling and refining what is already working.\n\nI appreciate the opportunity to continue contributing to the Zcash ecosystem and building on this momentum.\n",
+          "total_power": "27",
+          "start_height": 37599026,
+          "allow_revoting": true,
+          "min_voting_period": null
+        },
+        "createdAt": "2026-05-04T21:02:51.301Z"
       }
     ]
   },
