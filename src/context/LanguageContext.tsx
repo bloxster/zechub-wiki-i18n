@@ -7,7 +7,7 @@ import {
   useMemo,
   type ReactNode,
 } from 'react';
-import {usePathname, useRouter, useSearchParams} from 'next/navigation';
+import {usePathname, useSearchParams} from 'next/navigation';
 import type {Locale} from '@/i18n/config';
 import {localizedPath} from '@/lib/localizedPath';
 
@@ -43,15 +43,18 @@ export function LanguageProvider({
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const setLocale = useCallback(
     (locale: Locale) => {
       const nextPath = localizedPath(pathname || '/', locale);
       const query = searchParams?.toString() ?? '';
-      router.push(query ? `${nextPath}?${query}` : nextPath);
+      const nextUrl = query ? `${nextPath}?${query}` : nextPath;
+
+      // Locale is resolved in the proxy and root layout, which client-side
+      // navigation preserves. Reload the document to receive the new locale.
+      window.location.assign(nextUrl);
     },
-    [pathname, router, searchParams],
+    [pathname, searchParams],
   );
 
   const currentLanguage =
