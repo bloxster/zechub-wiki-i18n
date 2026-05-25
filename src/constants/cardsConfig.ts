@@ -10,7 +10,7 @@ export const cardsConfig = [
     {
       title: 'pickWallet',
       content: 'pickWalletContent',
-      url: 'wallets',
+      url: '/wallets',
       image: '/zwallets.png',
       imageLight: '/explore/light/pick-a-wallet.png',
       imageDark: '/explore/dark/pick-a-wallet.png',
@@ -18,7 +18,7 @@ export const cardsConfig = [
     {
       title: 'resources',
       content: 'resourcesContent',
-      url: 'guides/using-zec-privately',
+      url: '/guides/using-zec-privately',
       image: '/GuidesZ.png',
       imageLight: '/explore/light/guides.png',
       imageDark: '/explore/dark/guides.png',

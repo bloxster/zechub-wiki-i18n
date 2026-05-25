@@ -16,7 +16,12 @@ const dictionaries: Record<string, () => Promise<Dictionary>> = {
 export const getDictionary = async (locale: Locale = i18n.defaultLocale): Promise<Dictionary> => {
   const loader = dictionaries[locale] ?? dictionaries[i18n.defaultLocale];
   try {
-    return await loader();
+    const messages = await loader();
+    if (locale === i18n.defaultLocale) {
+      return messages;
+    }
+    const defaults = await dictionaries[i18n.defaultLocale]();
+    return deepMerge(defaults, messages);
   } catch (err) {
     console.error(`Failed to load dictionary for locale '${locale}', falling back to '${i18n.defaultLocale}':`, err);
     try {
@@ -27,3 +32,22 @@ export const getDictionary = async (locale: Locale = i18n.defaultLocale): Promis
     }
   }
 };
+
+function deepMerge(base: Dictionary, override: Dictionary): Dictionary {
+  const merged: Dictionary = {...base};
+  for (const [key, value] of Object.entries(override)) {
+    if (
+      value &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      base[key] &&
+      typeof base[key] === 'object' &&
+      !Array.isArray(base[key])
+    ) {
+      merged[key] = deepMerge(base[key] as Dictionary, value as Dictionary);
+    } else {
+      merged[key] = value;
+    }
+  }
+  return merged;
+}

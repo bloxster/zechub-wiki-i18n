@@ -1,39 +1,41 @@
 import MdxContainer from "@/components/MdxContainer";
 import ResearchIndexGrid from "@/components/Research/ResearchIndexGrid";
 import SideMenu from "@/components/SideMenu/SideMenu";
-import { getFileContentCached, getRootCached } from "@/lib/authAndFetch";
+import { getLocalizedFileContentCached, getRootCached } from "@/lib/authAndFetch";
+import { getDictionary } from "@/lib/getDictionary";
+import { getRequestLocale } from "@/i18n/request-locale";
 import { genMetadata, getBanner, getDynamicRoute } from "@/lib/helpers";
 import { normalizeMdx } from "@/lib/normalizeMdx";
 import { Metadata } from "next";
-import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
-import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';   // ← NEW: enables GitHub-style tables
-
-const LazyMdxComponent = React.lazy(() =>
-  import("@/components/MdxRenderer")
-);
+import { createMdxComponents } from "@/components/MdxComponents/MdxComponent";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const localizedPrefix = locale === "it" ? "/it" : "";
   const { slug = [] } = await params;
   if (slug.length === 0) {
-    return genMetadata({ title: "Zechub", url: "https://zechub.wiki" });
+    return genMetadata({ title: "Zechub", url: `https://zechub.wiki${localizedPrefix}` });
   }
   const folder = slug[0] || "";
   const capitalized = folder.charAt(0).toUpperCase() + folder.slice(1).replace(/-/g, " ");
   const title = slug.length > 1 && slug[1]
     ? `Zechub - ${capitalized} | ${slug[1].replace(/-/g, " ")}`
     : `Zechub - ${capitalized}`;
-  return genMetadata({ title, url: `https://zechub.wiki/${slug.join("/")}` });
+  return genMetadata({ title, url: `https://zechub.wiki${localizedPrefix}/${slug.join("/")}` });
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
-  headers();
+  const locale = await getRequestLocale();
+  const dictionary = (await getDictionary(locale)) as {
+    pages?: { folder?: { browse?: string } };
+  };
   let slug: string[] = [];
   try {
     const resolved = await props.params;
@@ -50,7 +52,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   let roots: any[] = [];
   try {
     const [md, rootsRaw] = await Promise.all([
-      getFileContentCached(url).catch(() => null),
+      getLocalizedFileContentCached(url, locale).catch(() => null),
       getRootCached(urlRoot).catch(() => []),
     ]);
     markdown = md;
@@ -104,19 +106,12 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
             {slug[0].replace(/-/g, " ")}
           </h1>
           <p className="text-xl text-muted-foreground">
-            Browse the articles using the sidebar on the left 👈
+            {dictionary.pages?.folder?.browse ?? "Browse the articles using the sidebar on the left"}
           </p>
         </div>
       </MdxContainer>
     );
   }
-
-  // ← UPDATED: Now supports tables everywhere
-  const serializedSource = await serialize(normalizeMdx(String(markdown || "")), {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-    },
-  });
 
   return (
     <MdxContainer
@@ -135,9 +130,11 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
           : undefined
       }
     >
-      <Suspense fallback={<span className="text-center text-3xl">Loading...</span>}>
-        <LazyMdxComponent source={serializedSource} />
-      </Suspense>
+      <MDXRemote
+        source={normalizeMdx(String(markdown || ""))}
+        components={createMdxComponents(locale)}
+        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+      />
     </MdxContainer>
   );
 }

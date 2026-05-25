@@ -10,12 +10,15 @@ import Explorer from "../Explorer/Explorer";
 import { FadeInAnimation } from "../UI/FadeInAnimation";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
+import { localizedPath } from "@/lib/localizedPath";
 
 type HomeProps = {
   text: string;
 };
 
 const HackathonBanner = ({ onDismiss }: { onDismiss: () => void }) => {
+  const { locale, t } = useLanguage();
+  const banner = t.home?.hackathonBanner ?? {};
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -84,7 +87,7 @@ const HackathonBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           <div className="inline-flex items-center gap-1.5 bg-[var(--color-brand)]/10 border border-[var(--color-brand)]/30 rounded-full px-3 py-1 mb-5">
             <span className="hk-pulse w-2 h-2 rounded-full bg-[var(--color-brand)] inline-block" />
             <span className="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-brand)]">
-              Live Now
+              {banner.live || "Live Now"}
             </span>
           </div>
 
@@ -93,22 +96,22 @@ const HackathonBanner = ({ onDismiss }: { onDismiss: () => void }) => {
             id="hackathon-title"
             className="text-3xl font-extrabold leading-tight text-foreground mb-2"
           >
-            ZecHub Hackathon{" "}
+            {banner.title || "ZecHub Hackathon"}{" "}
             <span className="text-[var(--color-brand)]">2026</span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-base text-muted-foreground leading-relaxed mb-7">
-            Build privacy-first applications on Zcash. Compete for prizes, earn
-            ZEC, and shape the future of financial freedom.
+            {banner.description ||
+              "Build privacy-first applications on Zcash. Compete for prizes, earn ZEC, and shape the future of financial freedom."}
           </p>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3 mb-7">
             {[
-              { label: "Prize Pool", value: "25 ZEC" },
-              { label: "Start", value: "May 25" },
-              { label: "End", value: "July 31" },
+              { label: banner.prizePool || "Prize Pool", value: "25 ZEC" },
+              { label: banner.start || "Start", value: "May 25" },
+              { label: banner.end || "End", value: "July 31" },
             ].map((s) => (
               <div
                 key={s.label}
@@ -127,17 +130,17 @@ const HackathonBanner = ({ onDismiss }: { onDismiss: () => void }) => {
           {/* Actions */}
           <div className="flex gap-3 flex-wrap">
             <a
-              href="/hackathon"
+              href={localizedPath("/hackathon", locale)}
               onClick={handleDismiss}
               className="btn-brand flex-1 flex items-center justify-center rounded-lg font-bold text-[13px] imd:text-sm py-3 px-5 transition-colors"
             >
-              Learn More →
+              {banner.learnMore || "Learn More"} →
             </a>
             <button
               onClick={handleDismiss}
               className="flex-1 bg-transparent border border-border text-muted-foreground hover:text-foreground hover:border-foreground/40 font-semibold text-[13px] imd:text-sm py-3 px-5 rounded-lg transition-colors cursor-pointer"
             >
-              Dismiss
+              {banner.dismiss || "Dismiss"}
             </button>
           </div>
         </div>

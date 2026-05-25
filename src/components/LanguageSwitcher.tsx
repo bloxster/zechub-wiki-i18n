@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Globe } from 'lucide-react';
 import { useLanguage, LANGUAGES } from '@/context/LanguageContext';
+import type { Locale } from '@/i18n/config';
 
 export function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,7 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, [isOpen]);
 
-  const handleSelect = (code: string) => {
+  const handleSelect = (code: Locale) => {
     setLocale(code);
     setIsOpen(false);
   };

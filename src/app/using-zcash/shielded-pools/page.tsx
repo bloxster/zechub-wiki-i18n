@@ -1,18 +1,12 @@
 import MdxContainer from "@/components/MdxContainer";
 import SideMenu from "@/components/SideMenu/SideMenu";
-import { getFileContentCached, getRootCached } from "@/lib/authAndFetch";
+import { getLocalizedFileContentCached, getRootCached } from "@/lib/authAndFetch";
+import { getRequestLocale } from "@/i18n/request-locale";
 import { genMetadata, getBanner } from "@/lib/helpers";
 import { normalizeMdx } from "@/lib/normalizeMdx";
 import { Metadata } from "next";
-import DynamicComponent from "next/dynamic";
-import { serialize } from 'next-mdx-remote/serialize';
-
-const MdxComponent = DynamicComponent(
-  () => import("@/components/MdxRenderer"),
-  {
-    loading: () => <span className="text-center text-3xl">Loading...</span>,
-  }
-);
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { createMdxComponents } from "@/components/MdxComponents/MdxComponent";
 
 export const metadata: Metadata = genMetadata({
   title: "Shielded pools",
@@ -21,16 +15,14 @@ export const metadata: Metadata = genMetadata({
 });
 
 export default async function Page() {
+  const locale = await getRequestLocale();
   const url = `/site/Using_Zcash/Shielded_Pools.md`;
   const urlRoot = `/site/using-zcash`;
   const [markdown, roots] = await Promise.all([
-    getFileContentCached(url),
+    getLocalizedFileContentCached(url, locale),
     getRootCached(urlRoot),
   ]);
   const content = markdown ? markdown : "No Data or Wrong file";
-
-  // ← This fixes the MDXRemote error
-  const mdxSource = await serialize(normalizeMdx(String(content)), {});
 
   return (
     <MdxContainer
@@ -39,7 +31,10 @@ export default async function Page() {
       roots={roots}
       heroImage={{ src: getBanner(`using-zcash`) }}
     >
-      <MdxComponent source={mdxSource} />
+      <MDXRemote
+        source={normalizeMdx(String(content))}
+        components={createMdxComponents(locale)}
+      />
     </MdxContainer>
   );
 }

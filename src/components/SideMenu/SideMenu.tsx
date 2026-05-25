@@ -12,6 +12,8 @@ import { FaListAlt } from "react-icons/fa";
 import { FiFile as FileIcon } from "react-icons/fi";
 import { Icon } from "../UI/Icon";
 import { MdPayment } from "react-icons/md";
+import { useLanguage } from "@/context/LanguageContext";
+import { localizedPath } from "@/lib/localizedPath";
 
 const getIconSize = (name: string): number | "tiny" | "small" | "medium" | "large" => {
   const sizes: Record<string, number | "tiny" | "small" | "medium" | "large"> = {
@@ -48,22 +50,38 @@ interface MenuProps {
 }
 
 const SideMenu = ({ folder, roots }: MenuProps) => {
+  const { locale, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const root = roots.map((item) => item.slice(0, -3));
   const name = folder[0].toUpperCase() + folder.slice(1);
   const fold = getName(name);
+  const folderLabel =
+    {
+      "Using Zcash": t.navigation?.usingZcash?.label,
+      "Zcash Community": t.navigation?.zcashCommunity?.label,
+      "Zcash Organizations": t.navigation?.organizations?.label,
+      "Zcash Tech": locale === "it" ? "Tecnologia Zcash" : "Zcash Tech",
+    }[fold] ?? fold;
+  const itemLabel = (itemName: string) =>
+    ({
+      Wallets: t.navigation?.usingZcash?.wallets,
+      "Shielded Pools": t.navigation?.usingZcash?.shieldedPools,
+      "Arborist Calls": t.navigation?.zcashCommunity?.arboristCalls,
+      "Custodial Exchanges": t.navigation?.usingZcash?.exchanges,
+      "Payment Processors": t.navigation?.usingZcash?.paymentProcessors,
+    }[itemName] ?? itemName);
 
   return (
     <div className="relative flex flex-wrap items-center xl:items-start order-1 justify-between xl:flex-col">
       <button onClick={toggleMenu} className="xl:hidden flex cursor-pointer">
         <BurgerMenuIcon size={24} />{" "}
-        <h3 className="ms-2 font-bold">Navigation</h3>
+        <h3 className="ms-2 font-bold">{locale === "it" ? "Navigazione" : "Navigation"}</h3>
       </button>
 
       <div className="flex justify-end xl:justify-center w-auto order-2 xl:order-3">
         <Link
-          href="/explore"
+          href={localizedPath("/explore", locale)}
           className="flex items-center rounded-full font-bold px-4 py-2 hover:bg-[#1984c7]"
           style={{
             background: "#1984c7",
@@ -72,7 +90,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
             color: "white",
           }}
         >
-          Explore
+          {t.navigation?.explore ?? "Explore"}
           <Icon size={"medium"} icon={Arrow} />
         </Link>
       </div>
@@ -82,7 +100,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
           isMenuOpen ? "block mt-7" : "hidden xl:block"
         }`}
       >
-        <h1 className="text-4xl font-bold mb-6"> {fold}: </h1>
+        <h1 className="text-4xl font-bold mb-6"> {folderLabel}: </h1>
         <div>
           <ul>
             {root.map((item: any, i: any) => {
@@ -95,7 +113,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
                   className={`my-3 hover:scale-110 hover:underline hover:cursor-pointer py-1`}
                 >
                   <Link
-                    href={`/${transformGithubFilePathToWikiLink(item)}#content`}
+                    href={`${localizedPath(`/${transformGithubFilePathToWikiLink(item)}`, locale)}#content`}
                   >
                     <div className={`flex items-center space-x-4`}>
                       <div className="flex-shrink-0">
@@ -107,7 +125,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium ">
-                          {item ? getName(item) : ""}
+                          {item ? itemLabel(getName(item)) : ""}
                         </p>
                       </div>
                       <div className="inline-flex items-center text-base font-semibold ">
@@ -122,7 +140,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
             {/* Wallets (custom PNG support + individual size) */}
             {fold === "Using Zcash" && (
               <li className={`my-3 hover:scale-110 hover:underline hover:cursor-pointer py-3`}>
-                <Link href="/wallets">
+                <Link href={localizedPath("/wallets", locale)}>
                   <div className={`flex items-center space-x-4`}>
                     <div className="flex-shrink-0">
                       <Icon
@@ -132,7 +150,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium ">Wallets</p>
+                      <p className="text-sm font-medium ">{itemLabel("Wallets")}</p>
                     </div>
                     <div className="inline-flex items-center text-base font-semibold ">
                       <Icon icon={Arrow} size={16} />
@@ -145,7 +163,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
             {/* Custodial Exchanges & Payment Processors (same pattern) */}
             {fold === "Using Zcash" && (
               <li className={`my-3 hover:scale-110 hover:underline hover:cursor-pointer py-3`}>
-                <Link href="/using-zcash/custodial-exchanges">
+                <Link href={localizedPath("/using-zcash/custodial-exchanges", locale)}>
                   <div className={`flex items-center space-x-4`}>
                     <div className="flex-shrink-0">
                       <Icon
@@ -155,7 +173,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium ">Custodial Exchanges</p>
+                      <p className="text-sm font-medium ">{itemLabel("Custodial Exchanges")}</p>
                     </div>
                     <div className="inline-flex items-center text-base font-semibold ">
                       <Icon icon={Arrow} size={16} />
@@ -167,7 +185,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
 
             {fold === "Using Zcash" && (
               <li className={`my-3 hover:scale-110 hover:underline hover:cursor-pointer py-3`}>
-                <Link href="/payment-processors">
+                <Link href={localizedPath("/payment-processors", locale)}>
                   <div className={`flex items-center space-x-4`}>
                     <div className="flex-shrink-0">
                       <Icon
@@ -177,7 +195,7 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium ">Payment Processors</p>
+                      <p className="text-sm font-medium ">{itemLabel("Payment Processors")}</p>
                     </div>
                     <div className="inline-flex items-center text-base font-semibold ">
                       <Icon icon={Arrow} size={16} />

@@ -461,7 +461,32 @@
       "title": "Payment Processors | ZecHub",
       "noData": "No Data or Wrong file",
       "bannerAlt": "wiki-banner"
+    },
+    "folder": {
+      "browse": "Browse the articles using the sidebar on the left"
     }
+  },
+  "arboristCalls": {
+    "title": "Zcash Arborist Calls",
+    "description": "Complete archive of all Zcash community arborist calls",
+    "totalCalls": "Total Calls",
+    "search": "Search",
+    "searchPlaceholder": "Call # or date...",
+    "status": "Status",
+    "allStatus": "All Status",
+    "completed": "Completed",
+    "upcoming": "Upcoming",
+    "year": "Year",
+    "allYears": "All Years",
+    "showing": "Showing {shown} of {total} calls",
+    "archive": "Arborist Calls Archive",
+    "callNumber": "Call #",
+    "date": "Date",
+    "resources": "Resources",
+    "notes": "Notes",
+    "video": "Video",
+    "agenda": "Agenda",
+    "footer": "Zcash Community Arborist Calls Archive"
   },
   "developers": {
     "quickStart": {

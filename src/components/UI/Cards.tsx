@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FadeInAnimation } from "./FadeInAnimation";
 import { useDarkModeContext } from "@/hooks/useDarkModeContext";
 import { useLanguage } from "@/context/LanguageContext";
+import { localizedPath } from "@/lib/localizedPath";
 
 interface Props {
   title: string;
@@ -15,15 +16,16 @@ interface Props {
 }
 
 const Cards = ({ title, paraph, url, image, imageLight, imageDark }: Props) => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const { dark } = useDarkModeContext();
+  const href = localizedPath(url, locale);
   const src =
     dark && imageDark ? imageDark : !dark && imageLight ? imageLight : image;
 
   return (
     <div className="flex w-full min-w-[30%] md:w-1/5 bg-slate-100 border border-gray-200 rounded-lg shadow dark:bg-slate-800 dark:border-slate-700 hover:-translate-y-1 transition-all duration-100">
       <FadeInAnimation className="flex flex-col justify-center items-center w-full">
-        <Link href={url} className="w-full flex justify-center">
+        <Link href={href} className="w-full flex justify-center">
           <Image
             className="rounded-t-lg object-cover"
             src={src}
@@ -33,7 +35,7 @@ const Cards = ({ title, paraph, url, image, imageLight, imageDark }: Props) => {
           />
         </Link>
         <div className="flex flex-col items-center min-h-56 p-5 min-h-56 space-y-4 flex-1">
-          <Link href={url}>
+          <Link href={href}>
             <h2 className="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {title}
             </h2>
@@ -44,7 +46,7 @@ const Cards = ({ title, paraph, url, image, imageLight, imageDark }: Props) => {
         </div>
         <div className="my-4 px-4 w-full ">
           <Link
-            href={url}
+            href={href}
             className="inline-flex justify-center items-center w-full px-3 py-4 text-md font-medium text-center text-white rounded-lg bg-[#1984c7] hover:bg-[#1574af] focus:ring-[#1984c7]   focus:ring-4 focus:outline-none  dark:hover:bg-[#1574af] dark:focus:ring-blue-800"
           >
             {t.common?.readMore || "Read more"}

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { FadeInAnimation } from "../UI/FadeInAnimation";
 import { useLanguage } from "@/context/LanguageContext";
 import { ThemeImage } from "../UI/ThemeImage";
+import { localizedPath } from "@/lib/localizedPath";
 
 const ContentSections = () => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <section className="flex space-y-24 flex-col w-full ">
@@ -74,7 +75,7 @@ const ContentSections = () => {
               t.home?.sections?.hackathon?.mainLink || "Join the Hackathon",
             primary: true,
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
       <InfoCard
         id="zcash-me"
@@ -92,7 +93,7 @@ const ContentSections = () => {
             label: t.home?.sections?.zcashMe?.link || "Visit Zcash.Me",
             primary: true,
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
       <InfoCard
         id="what-is-zcash"
@@ -115,7 +116,7 @@ const ContentSections = () => {
             label:
               t.home?.sections?.whatIsZcash?.techLink || "Zcash Technology",
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
 
       {/* Hackathon Section */}
@@ -136,7 +137,7 @@ const ContentSections = () => {
             label: t.home?.sections?.zcashMe?.link || "Visit Zcash.Me",
             primary: true,
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
       {/* Global Ambassadors Section */}
       <InfoCard
@@ -160,7 +161,7 @@ const ContentSections = () => {
               "Meet the Ambassadors",
             primary: true,
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
       {/* Shielded Newsletter Section */}
       <InfoCard
@@ -179,7 +180,7 @@ const ContentSections = () => {
             label: t.home?.sections?.newsletter?.link || "Subscribe",
             primary: true,
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
 
       {/* Free2Z Section */}
@@ -224,7 +225,7 @@ const ContentSections = () => {
             href: "https://zechub.wiki/map",
             label: t.home?.sections?.payWithZcash?.mapLink || "Flexa",
           },
-        ]}
+        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
       />
     </section>
   );

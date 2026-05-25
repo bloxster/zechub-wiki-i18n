@@ -34,7 +34,7 @@ const WalletList: React.FC<Props> = ({ allWallets }) => {
   const [success, setSuccess] = useState<{ [key: string]: string }>({});
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const filtersLabel = t?.wallets?.filters ?? "Filters";
   const showNavLabel = t?.wallets?.showNavigation ?? "Show Navigation";
   const closeLabel = t?.wallets?.close ?? "Close";
@@ -43,6 +43,10 @@ const WalletList: React.FC<Props> = ({ allWallets }) => {
     t?.wallets?.errorGettingLikes ?? "Error getting likes:";
   const errorUpdatingRatingPrefix =
     t?.wallets?.errorUpdatingRating ?? "Error updating rating:";
+  const categoryLabel = (category: string) =>
+    locale === "it"
+      ? ({Devices: "Dispositivi", Pools: "Pool", Features: "Funzionalita"}[category] ?? category)
+      : category;
 
   const handleToggleFilter = () => setIsFilterVisible((v) => !v);
 
@@ -231,9 +235,9 @@ const WalletList: React.FC<Props> = ({ allWallets }) => {
                   link={wallet.url}
                   logo={wallet.imageUrl}
                   tags={[
-                    { category: "Devices", values: wallet.devices },
-                    { category: "Pools", values: wallet.pools },
-                    { category: "Features", values: wallet.features },
+                    { category: categoryLabel("Devices"), values: wallet.devices },
+                    { category: categoryLabel("Pools"), values: wallet.pools },
+                    { category: categoryLabel("Features"), values: wallet.features },
                   ]}
                   likes={likes[wallet.title] || 0}
                   syncSpeed={wallet.syncSpeed}

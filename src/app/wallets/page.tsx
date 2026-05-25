@@ -1,8 +1,9 @@
 // src/app/wallets/page.tsx
 import React from "react";
 import Image from "next/image";
-import { getFileContentCached, getRootCached } from "@/lib/authAndFetch";
+import { getLocalizedFileContentCached, getRootCached } from "@/lib/authAndFetch";
 import { getDictionary } from "@/lib/getDictionary";
+import { getRequestLocale } from "@/i18n/request-locale";
 import { getBanner } from "@/lib/helpers";
 import { parseMarkdown } from "@/lib/parseMarkdown";
 import WalletList from "@/components/Wallet/WalletList";
@@ -22,10 +23,11 @@ type WalletsDictionary = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const dict = (await getDictionary()) as WalletsDictionary;
+  const locale = await getRequestLocale();
+  const dict = (await getDictionary(locale)) as WalletsDictionary;
   return genMetadata({
     title: dict.pages?.wallets?.title || "Wallets | Zechub",
-    url: "https://zechub.wiki/wallets",
+    url: locale === "it" ? "https://zechub.wiki/it/wallets" : "https://zechub.wiki/wallets",
     image: imgUrl,
   }) as Metadata;
 }
@@ -37,13 +39,14 @@ export default async function Page(props: {
   const { slug } = params;
   const url = `/site/Using_Zcash/Wallets.md`;
   const urlRoot = `/site/using-zcash`;
+  const locale = await getRequestLocale();
 
   const [markdown, roots] = await Promise.all([
-    getFileContentCached(url),
+    getLocalizedFileContentCached(url, locale),
     getRootCached(urlRoot),
   ]);
 
-  const dict = (await getDictionary()) as WalletsDictionary;
+  const dict = (await getDictionary(locale)) as WalletsDictionary;
   const content = markdown
     ? markdown
     : (dict.pages?.wallets?.noData ?? "No Data or Wrong file");

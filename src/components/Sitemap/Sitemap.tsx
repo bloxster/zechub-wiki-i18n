@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SITE_LINKS } from "@/constants/siteLinks";
+import { getRequestLocale } from "@/i18n/request-locale";
+import { localizedPath } from "@/lib/localizedPath";
 
-export default function SitemapPage() {
+export default async function SitemapPage() {
+  const locale = await getRequestLocale();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -49,7 +53,7 @@ export default function SitemapPage() {
                     {section.links.map((link) => (
                       <Link
                         key={link.label}
-                        href={link.href}
+                        href={localizedPath(link.href, locale)}
                         target={link.target}
                         className={
                           isGuidesSection
@@ -78,7 +82,7 @@ export default function SitemapPage() {
                           {subsection.links.map((link) => (
                             <Link
                               key={link.label}
-                              href={link.href}
+                              href={localizedPath(link.href, locale)}
                               target={link.target}
                               className="group flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-500 transition-colors"
                             >

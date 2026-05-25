@@ -2,6 +2,9 @@ import { Footer, Navigation } from "@/components";
 import ProgressBar from "@/components/UI/ProgressBar";
 import { DarkModeProvider } from "@/provider/DarkModeProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { getDictionary } from "@/lib/getDictionary";
+import { getRequestLocale } from "@/i18n/request-locale";
+import { NextIntlClientProvider } from "next-intl";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import FloatingExplore from "@/components/FloatingExplore";
@@ -32,29 +35,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en-US" suppressHydrationWarning>
-      <head>
-        <style>{`
-          .goog-te-banner-frame,
-          .goog-te-balloon-frame,
-          iframe.goog-te-banner-frame,
-          #goog-gt-tt,
-          .goog-tooltip,
-          div.skiptranslate:not(#google_translate_element) {
-            display: none !important;
-            visibility: hidden !important;
-          }
-          body {
-            top: 0 !important;
-            position: static !important;
-          }
-          .goog-text-highlight {
-            background: none !important;
-            box-shadow: none !important;
-          }
-        `}</style>
+  const locale = await getRequestLocale();
+  const messages = await getDictionary(locale);
 
+  return (
+    <html lang={locale} suppressHydrationWarning>
+      <head>
         {/* Manual RSS link as backup for better feed detection (Brave, Feedly, etc.) */}
         <link
           rel="alternate"
@@ -64,17 +50,6 @@ export default async function RootLayout({
         />
       </head>
       <body className={`px-0 ${inter.className} dark:bg-slate-900 dark:text-white`}>
-        {/* Hidden Google Translate mount — must be inside <body> */}
-        <div
-          id="google_translate_element"
-          style={{
-            position: "absolute",
-            top: -9999,
-            left: -9999,
-            width: 300,
-            height: 60,
-          }}
-        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -82,11 +57,13 @@ export default async function RootLayout({
           disableTransitionOnChange={true}
           enableColorScheme={true}
         >
-          <LanguageProvider>
-            <DarkModeProvider>
-              <NavigationWrapper>{children}</NavigationWrapper>
-            </DarkModeProvider>
-          </LanguageProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <LanguageProvider initialLocale={locale} messages={messages}>
+              <DarkModeProvider>
+                <NavigationWrapper>{children}</NavigationWrapper>
+              </DarkModeProvider>
+            </LanguageProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -28,16 +28,12 @@ import {
 } from "@/components/UI/Aborist/TableList";
 import { FileText, XIcon, Video, TreePine, Users, Search } from "lucide-react";
 import { useState } from "react";
-import { genMetadata } from "@/lib/helpers";
-import { Metadata } from "next";
 import { arboristCalls } from "@/constants/arboristCalls";
-
-export const metadata: Metadata = genMetadata({
-  title: "ZecHub Aborist Calls",
-  url: "https://zechub.wiki/aborist-calls",
-});
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ArboristCallsPage() {
+  const { t } = useLanguage();
+  const labels = t.arboristCalls ?? {};
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [yearFilter, setYearFilter] = useState("all");
@@ -84,10 +80,10 @@ export default function ArboristCallsPage() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-6">
-            <h1 className="text-3xl font-bold">Zcash Arborist Calls</h1>
+            <h1 className="text-3xl font-bold">{labels.title ?? "Zcash Arborist Calls"}</h1>
           </div>
           <p className="text-gray-600">
-            Complete archive of all Zcash community arborist calls
+            {labels.description ?? "Complete archive of all Zcash community arborist calls"}
           </p>
         </div>
 
@@ -99,7 +95,7 @@ export default function ArboristCallsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">
-                    Total Calls
+                    {labels.totalCalls ?? "Total Calls"}
                   </p>
                   <p className="text-2xl font-bold">{arboristCalls.length}</p>
                 </div>
@@ -111,12 +107,12 @@ export default function ArboristCallsPage() {
           {/* Filters */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Search
+              {labels.search ?? "Search"}
             </label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="Call # or date..."
+                placeholder={labels.searchPlaceholder ?? "Call # or date..."}
                 className="pl-10"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -126,30 +122,30 @@ export default function ArboristCallsPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Status
+              {labels.status ?? "Status"}
             </label>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-yellow-300 dark:bg-yellow-500">
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="upcoming">Upcoming</SelectItem>
+                <SelectItem value="all">{labels.allStatus ?? "All Status"}</SelectItem>
+                <SelectItem value="completed">{labels.completed ?? "Completed"}</SelectItem>
+                <SelectItem value="upcoming">{labels.upcoming ?? "Upcoming"}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Year
+              {labels.year ?? "Year"}
             </label>
             <Select value={yearFilter} onValueChange={setYearFilter}>
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-yellow-300 dark:bg-yellow-500">
-                <SelectItem value="all">All Years</SelectItem>
+                <SelectItem value="all">{labels.allYears ?? "All Years"}</SelectItem>
                 <SelectItem value="2025">2025</SelectItem>
                 <SelectItem value="2024">2024</SelectItem>
                 <SelectItem value="2023">2023</SelectItem>
@@ -161,24 +157,24 @@ export default function ArboristCallsPage() {
         {/* Results count */}
         <div className="mb-4">
           <p className="text-sm text-gray-600">
-            Showing {filteredCalls.length} of {arboristCalls.length} calls
+            {(labels.showing ?? "Showing").replace("{shown}", String(filteredCalls.length)).replace("{total}", String(arboristCalls.length))}
           </p>
         </div>
 
         {/* Calls Table */}
         <Card>
           <CardHeader className="pb-4">
-            <CardTitle className="text-lg">Arborist Calls Archive</CardTitle>
+            <CardTitle className="text-lg">{labels.archive ?? "Arborist Calls Archive"}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-20 font-semibold">Call #</TableHead>
-                    <TableHead className="w-32 font-semibold">Date</TableHead>
-                    <TableHead className="w-20 font-semibold">Status</TableHead>
-                    <TableHead className="font-semibold">Resources</TableHead>
+                    <TableHead className="w-20 font-semibold">{labels.callNumber ?? "Call #"}</TableHead>
+                    <TableHead className="w-32 font-semibold">{labels.date ?? "Date"}</TableHead>
+                    <TableHead className="w-20 font-semibold">{labels.status ?? "Status"}</TableHead>
+                    <TableHead className="font-semibold">{labels.resources ?? "Resources"}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -214,7 +210,7 @@ export default function ArboristCallsPage() {
                               icon={FileText}
                               className="text-blue-600 hover:text-blue-800 hover:bg-blue-50"
                             >
-                              Notes
+                              {labels.notes ?? "Notes"}
                             </LinkButton>
                           )}
                           {call.video && (
@@ -223,7 +219,7 @@ export default function ArboristCallsPage() {
                               icon={Video}
                               className="text-red-600 hover:text-red-800 hover:bg-red-50"
                             >
-                              Video
+                              {labels.video ?? "Video"}
                             </LinkButton>
                           )}
                           {call.twitter && (
@@ -241,7 +237,7 @@ export default function ArboristCallsPage() {
                               icon={FileText}
                               className="text-gray-600 hover:text-gray-800 hover:bg-gray-50"
                             >
-                              Agenda
+                              {labels.agenda ?? "Agenda"}
                             </LinkButton>
                           )}
                         </div>
@@ -258,7 +254,7 @@ export default function ArboristCallsPage() {
         <div className="mt-8 text-center text-gray-500">
           <p className="flex items-center justify-center gap-2 text-sm">
             <TreePine className="h-4 w-4" />
-            Zcash Community Arborist Calls Archive
+            {labels.footer ?? "Zcash Community Arborist Calls Archive"}
           </p>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../UI/Sheet";
 import SocialIcons from "../UI/SocialIcons";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
+import { localizedPath } from "@/lib/localizedPath";
 
 import { matchIcons } from "@/constants/Icons";
 import {
@@ -269,6 +270,7 @@ const MoreMenuItem = ({
   t: any;
   onLinkClick: () => void;
 }) => {
+  const { locale } = useLanguage();
   const [flyoutOpen, setFlyoutOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -287,7 +289,7 @@ const MoreMenuItem = ({
     return (
       <Link
         prefetch
-        href={item.path ?? "#"}
+        href={localizedPath(item.path ?? "#", locale)}
         onClick={onLinkClick}
         className={`flex items-center gap-2 text-sm w-full px-3 py-2 rounded-sm text-nav-foreground hover:text-nav-hover transition-colors duration-200 ${liStyle}`}
         {...(item.newTab && { target: "_blank", rel: "noopener noreferrer" })}
@@ -340,7 +342,7 @@ const MoreMenuItem = ({
             <Link
               prefetch
               key={`${link.name}-${idx}`}
-              href={link.path ?? "#"}
+              href={localizedPath(link.path ?? "#", locale)}
               onClick={onLinkClick}
               className={`flex items-center gap-2 text-sm w-full px-3 py-2 rounded-sm text-nav-foreground hover:text-nav-hover transition-colors duration-200 ${liStyle}`}
               {...(link.newTab && {
@@ -370,7 +372,7 @@ const NavLinks = ({
   classes: string;
   closeMenu: () => void;
 }) => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const handleLinkClick = () => {
     closeMenu();
   };
@@ -395,7 +397,7 @@ const NavLinks = ({
                 >
                   <Link
                     prefetch
-                    href={link.path ?? "#"}
+                    href={localizedPath(link.path ?? "#", locale)}
                     onClick={handleLinkClick}
                     className="flex items-center gap-2 text-sm w-full text-nav-foreground hover:text-nav-hover"
                     {...(link.newTab && {
@@ -419,7 +421,7 @@ const NavLinks = ({
             <Link
               prefetch
               key={`${item.name}-${i}`}
-              href={item.path ?? "#"}
+              href={localizedPath(item.path ?? "#", locale)}
               onClick={handleLinkClick}
               className={`text-nav-foreground hover:text-nav-hover transition-colors duration-200 whitespace-nowrap`}
               {...(item.newTab && {
@@ -456,7 +458,7 @@ const NavLinks = ({
               >
                 <Link
                   prefetch
-                  href={link.path ?? "#"}
+                  href={localizedPath(link.path ?? "#", locale)}
                   onClick={handleLinkClick}
                   className="flex items-center gap-2 text-sm w-full text-nav-foreground hover:text-nav-hover"
                   {...(link.newTab && {
@@ -514,7 +516,7 @@ const NavLinks = ({
                             >
                               <Link
                                 prefetch
-                                href={link.path ?? "#"}
+                                href={localizedPath(link.path ?? "#", locale)}
                                 onClick={handleLinkClick}
                                 className="flex items-center gap-2 text-sm w-full"
                                 {...(link.newTab && {
@@ -545,7 +547,7 @@ const NavLinks = ({
                     ) : (
                       <Link
                         prefetch
-                        href={item.path ?? "#"}
+                        href={localizedPath(item.path ?? "#", locale)}
                         onClick={handleLinkClick}
                         className="w-full text-white hover:text-nav-hover"
                         {...(item.newTab && {
@@ -615,7 +617,7 @@ const NavLinks = ({
             e.currentTarget.style.setProperty("--mouse-y", "50%");
           }}
         >
-          <Link prefetch href="/dashboard" onClick={handleLinkClick}>
+          <Link prefetch href={localizedPath("/dashboard", locale)} onClick={handleLinkClick}>
             {t.navigation?.dashboard || "Dashboard"}
           </Link>
         </Button>
@@ -683,7 +685,7 @@ const getExploreIcon = (name: string) => {
 };
 
 const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const { dark } = useDarkModeContext();
   const folder = dark ? "dark" : "light";
   const handleLinkClick = () => closeMenu();
@@ -729,7 +731,7 @@ const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
         {/* Dashboard – badge removed */}
         <Link
           prefetch
-          href="/dashboard"
+          href={localizedPath("/dashboard", locale)}
           onClick={handleLinkClick}
           className="flex flex-col items-center justify-center gap-2 px-4 py-4 rounded-2xl bg-white/5 dark:bg-white/5 border border-amber-200 dark:border-amber-800 hover:bg-yellow-300 dark:hover:bg-yellow-500 hover:border-amber-400 transition-all duration-200 group font-semibold text-base"
         >
@@ -754,7 +756,7 @@ const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
               <Link
                 prefetch
                 key={`${link.name}-${idx}`}
-                href={link.path ?? "#"}
+                href={localizedPath(link.path ?? "#", locale)}
                 onClick={handleLinkClick}
                 className={`flex items-center gap-2 px-3 py-2 rounded-md text-nav-foreground hover:bg-nav-hover-bg transition-colors duration-200 text-sm ${liStyle} text-slate-700`}
                 {...(link.newTab && {
@@ -776,7 +778,7 @@ const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
           <Link
             prefetch
             key={`${item.name}-${i}`}
-            href={item.path ?? "#"}
+            href={localizedPath(item.path ?? "#", locale)}
             onClick={handleLinkClick}
             className="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all hover:bg-yellow-400 hover:text-black dark:hover:bg-amber-600 font-medium"
           >
@@ -814,6 +816,7 @@ const MobileNav = ({ closeMenu }: { closeMenu: () => void }) => {
 };
 
 const Navigation = () => {
+  const { locale } = useLanguage();
   const { theme, setTheme } = useTheme();
   const [openSearch, setOpenSearch] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -832,7 +835,7 @@ const Navigation = () => {
       <div className="mx-auto w-full max-w-372 px-2 md:px-4">
         <div className="flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
-          <Link prefetch href="/" className="shrink-0 hover:cursor-pointer">
+          <Link prefetch href={localizedPath("/", locale)} className="shrink-0 hover:cursor-pointer">
             <Logo theme={mounted && isDark} />
           </Link>
 

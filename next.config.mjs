@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx";
+import createNextIntlPlugin from "next-intl/plugin";
 import rehypePlugins from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
 
@@ -59,6 +60,7 @@ const withMDX = createMDX({
     rehypePlugins: [rehypePlugins],
   },
 });
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 // removes the bad key injected by old @next/mdx
 const mdxConfig = withMDX(nextConfig);
@@ -66,4 +68,4 @@ if (mdxConfig.experimental?.turbo) {
   delete mdxConfig.experimental.turbo;
 }
 
-export default mdxConfig;
+export default withNextIntl(mdxConfig);

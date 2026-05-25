@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { HTMLProps, JSX } from "react";
 import { transformGithubFilePathToWikiLink } from "@/lib/helpers";
+import { localizedPath } from "@/lib/localizedPath";
+import type { Locale } from "@/i18n/config";
 import type { MDXComponents } from "mdx/types";
 
 // Strong slugify for TOC links (handles parentheses, +, etc.)
@@ -16,38 +18,37 @@ const slugify = (text: string): string => {
     .replace(/^-+|-+$/g, '');
 };
 
-const MdxComponents = {
-  // TOC LINKS — underline on hover only (no dashed line)
-  a: (props: HTMLProps<HTMLAnchorElement>): JSX.Element => {
-    let href = props.href || "";
-    if (href.startsWith("#")) {
-      const normalized = "#" + slugify(href.slice(1));
-      const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        const targetId = normalized.slice(1);
-        const element = document.getElementById(targetId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      };
-      return (
-        <a
-          href={normalized}
-          className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200 hover:underline scroll-mt-20"
-          onClick={handleClick}
-          {...props}
-        />
-      );
-    }
+function localizedMdxLink(props: HTMLProps<HTMLAnchorElement>, locale: Locale): JSX.Element {
+  const href = props.href || "";
+  if (href.startsWith("#")) {
+    const normalized = "#" + slugify(href.slice(1));
     return (
-      <Link
-        href={href.startsWith("/site") ? transformGithubFilePathToWikiLink(href) : href}
-        target={href.startsWith("/site") ? "" : "_blank"}
-        className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200 underline decoration-dashed"
-      >
-        {props.children}
-      </Link>
+      <a
+        {...props}
+        href={normalized}
+        className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200 hover:underline scroll-mt-20"
+      />
     );
-  },
+  }
+
+  const transformedHref = href.startsWith("/site")
+    ? `/${transformGithubFilePathToWikiLink(href)}`
+    : href;
+  const internal = transformedHref.startsWith("/");
+  return (
+    <Link
+      href={internal ? localizedPath(transformedHref, locale) : transformedHref}
+      target={internal ? undefined : "_blank"}
+      className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200 underline decoration-dashed"
+    >
+      {props.children}
+    </Link>
+  );
+}
+
+export const createMdxComponents = (locale: Locale) => ({
+  // TOC LINKS — underline on hover only (no dashed line)
+  a: (props: HTMLProps<HTMLAnchorElement>): JSX.Element => localizedMdxLink(props, locale),
 
   // Headings with IDs
   h1: (props: HTMLProps<HTMLHeadingElement>): JSX.Element => {
@@ -137,6 +138,6 @@ const MdxComponents = {
   ol: (props: React.ComponentProps<"ol">): JSX.Element => <ol className="list-decimal pl-6 my-4" {...props} />,
   li: (props: HTMLProps<HTMLLIElement>): JSX.Element => <li {...props} />,
   p: (props: HTMLProps<HTMLParagraphElement>): JSX.Element => <p className="my-4" {...props} />,
-} as MDXComponents;
+}) as MDXComponents;
 
-export default MdxComponents;
+export default createMdxComponents("en");

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import ResearchArticleAside from "@/components/Research/ResearchArticleAside";
+import { getRequestLocale } from "@/i18n/request-locale";
+import { localizedPath } from "@/lib/localizedPath";
 
 type MdxContainerProps = {
   roots: any;
@@ -38,6 +40,7 @@ export default async function MdxContainer({
   layoutVariant = "default",
   researchMeta,
 }: MdxContainerProps) {
+  const locale = await getRequestLocale();
   const lightSrc = heroImage?.src ?? defaultImgSource;
   const darkSrc = heroImage?.darkSrc ?? lightSrc;
   const width = heroImage?.width ?? 800;
@@ -90,7 +93,7 @@ export default async function MdxContainer({
               >
                 <ol className="flex flex-wrap items-center gap-1.5">
                   <li>
-                    <Link href="/" className="transition-colors hover:text-foreground">
+                    <Link href={localizedPath("/", locale)} className="transition-colors hover:text-foreground">
                       Wiki
                     </Link>
                   </li>
@@ -98,7 +101,7 @@ export default async function MdxContainer({
                     /
                   </li>
                   <li>
-                    <Link href="/research" className="transition-colors hover:text-foreground">
+                    <Link href={localizedPath("/research", locale)} className="transition-colors hover:text-foreground">
                       Research
                     </Link>
                   </li>

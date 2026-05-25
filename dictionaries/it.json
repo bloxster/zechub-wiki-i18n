@@ -95,10 +95,73 @@
         "title": "Scegli un wallet",
         "content": "Trova il wallet Zcash adatto alle tue esigenze"
       },
-      "useZecPrivately": {
-        "title": "Usa ZEC in modo privato",
-        "content": "Impara a usare le funzionalità di privacy di Zcash"
+      "resources": {
+        "title": "Risorse Zcash",
+        "content": "Guide per comprendere i nodi completi Zcash, gli ZK-SNARKs e altro"
       }
+    },
+    "sections": {
+      "hackathon": {
+        "title": "Partecipa all'Hackathon",
+        "description": "Sviluppa e collabora con la community Zcash su infrastruttura, giochi, FROST, Zcash Login e contabilita. Dal 25 maggio al 15 luglio 2026, con un montepremi di 25 ZEC.",
+        "mainLink": "Partecipa all'Hackathon"
+      },
+      "whatIsZcash": {
+        "title": "Che cos'e Zcash?",
+        "description": "Zcash e un registro blockchain open source dotato di un sofisticato sistema di prove a conoscenza zero. Offre un livello superiore di privacy preservando la riservatezza dei metadati delle transazioni.",
+        "mainLink": "Che cos'e Zcash?",
+        "techLink": "Tecnologia Zcash"
+      },
+      "zcashMe": {
+        "title": "Zcash.me",
+        "description": "Zcash.Me e una directory pubblica degli utenti Zcash con messaggistica privata, classifiche e utenti verificati.",
+        "link": "Visita Zcash.Me"
+      },
+      "globalAmbassadors": {
+        "title": "Zcash Global Ambassadors",
+        "description": "Gli ambasciatori globali Zcash promuovono adozione ed educazione sulla criptovaluta orientata alla privacy nelle rispettive regioni.",
+        "link": "Scopri gli ambasciatori"
+      },
+      "newsletter": {
+        "title": "Newsletter Shielded",
+        "description": "Iscriviti con il tuo Unified Address per ricevere nel wallet aggiornamenti sull'ecosistema Zcash e statistiche della rete.",
+        "link": "Iscriviti"
+      },
+      "free2z": {
+        "title": "Free2Z",
+        "description": "Free2Z e una piattaforma sociale basata su Zcash, con donazioni peer-to-peer, condivisione dei ricavi e strumenti creativi.",
+        "link": "Free2Z"
+      },
+      "payWithZcash": {
+        "title": "Paga con Zcash",
+        "description": "Questa directory risponde alla domanda: dove posso pagare con Zcash? Le voci sono informative e non costituiscono raccomandazioni.",
+        "mainLink": "paywithz.cash",
+        "mapLink": "SPEDN"
+      }
+    },
+    "hackathonBanner": {
+      "live": "In corso",
+      "title": "ZecHub Hackathon",
+      "description": "Crea applicazioni orientate alla privacy su Zcash. Partecipa per ottenere premi in ZEC e contribuire al futuro della liberta finanziaria.",
+      "prizePool": "Montepremi",
+      "start": "Inizio",
+      "end": "Fine",
+      "learnMore": "Scopri di piu",
+      "dismiss": "Chiudi"
+    },
+    "explore": {
+      "startHere": "Inizia_da_Qui",
+      "tutorials": "Tutorial",
+      "usingZcash": "Usare_Zcash",
+      "guides": "Guide",
+      "zcashTech": "Tecnologia_Zcash",
+      "organizations": "Organizzazioni_Zcash",
+      "community": "Community_Zcash",
+      "zkavClub": "ZKAV_Club",
+      "privacyTools": "Strumenti_Privacy",
+      "research": "Ricerca",
+      "glossary": "Glossario_e_FAQ",
+      "contribute": "Contribuisci"
     }
   },
   "visualizer": {
@@ -111,6 +174,46 @@
     "advancedDescription": "Approfondimenti tecnici su crittografia, consenso e infrastruttura",
     "contributors": "Contributori",
     "contributorsDescription": "Modi per contribuire all'ecosistema Zcash e ottenere ricompense"
+  },
+  "arboristCalls": {
+    "title": "Zcash Arborist Calls",
+    "description": "Archivio completo degli Arborist Calls della community Zcash",
+    "totalCalls": "Call totali",
+    "search": "Cerca",
+    "searchPlaceholder": "Numero call o data...",
+    "status": "Stato",
+    "allStatus": "Tutti gli stati",
+    "completed": "Completata",
+    "upcoming": "In programma",
+    "year": "Anno",
+    "allYears": "Tutti gli anni",
+    "showing": "Visualizzate {shown} di {total} call",
+    "archive": "Archivio Arborist Calls",
+    "callNumber": "Call n.",
+    "date": "Data",
+    "resources": "Risorse",
+    "notes": "Note",
+    "video": "Video",
+    "agenda": "Agenda",
+    "footer": "Archivio Zcash Community Arborist Calls"
+  },
+  "pages": {
+    "folder": {
+      "browse": "Sfoglia gli articoli utilizzando la barra laterale a sinistra"
+    },
+    "wallets": {
+      "title": "Wallet | ZecHub",
+      "noData": "Nessun dato disponibile",
+      "bannerAlt": "Banner wiki"
+    }
+  },
+  "wallets": {
+    "filters": "Filtri",
+    "showNavigation": "Mostra navigazione",
+    "close": "Chiudi",
+    "savedReview": "La tua recensione e stata salvata.",
+    "errorGettingLikes": "Errore nel recupero dei voti:",
+    "errorUpdatingRating": "Errore nell'aggiornamento del voto:"
   },
   "dao": {
     "title": "ZecHub DAO",

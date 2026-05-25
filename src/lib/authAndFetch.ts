@@ -1,6 +1,7 @@
 import { getFiles, transformUri } from "@/lib/helpers";
 import { unstable_cache } from "next/cache";
 import { Octokit } from "octokit";
+import type { Locale } from "@/i18n/config";
 
 const { GITHUB_TOKEN, OWNER, REPO, BRANCH } = process.env;
 
@@ -74,6 +75,17 @@ export const getFileContentCached = unstable_cache(
     tags: ["github-content"],
   },
 );
+
+export async function getLocalizedFileContentCached(path: string, locale: Locale) {
+  if (locale === "it") {
+    const translated = await getFileContentCached(`/translations/it${path}`);
+    if (translated) {
+      return translated;
+    }
+  }
+
+  return getFileContentCached(path);
+}
 
 export const getRootCached = unstable_cache(
   async (path: string) => {

@@ -1,6 +1,7 @@
-export type Locale = string;
+export const locales = ['en', 'it'] as const;
+export type Locale = (typeof locales)[number];
 
 export const i18n = {
   defaultLocale: 'en' as Locale,
-  locales: ['en', 'es', 'fr', 'de', 'it', 'pt', 'ar', 'zh', 'hi', 'ru', 'ja', 'ko', 'tr', 'uk', 'sw', 'yo', 'ig', 'ak', 'ee'] as Locale[],
+  locales,
 } as const;
