@@ -1,0 +1,4 @@
+[submodule "content"]
+	path = content
+	url = https://github.com/bloxster/zechub-content-i18n-private.git
+	branch = feature/static-it-translation-pilot

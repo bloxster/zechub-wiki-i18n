@@ -50,6 +50,12 @@ const nextConfig = {
     ];
   },
 
+  // Bundle the `content/` submodule Markdown into the serverless functions so
+  // runtime fs reads work on Vercel (file tracing can't infer dynamic paths).
+  outputFileTracingIncludes: {
+    "/**": ["./content/**/*.md"],
+  },
+
   // Keeps Turbopack happy
   turbopack: {},
 };

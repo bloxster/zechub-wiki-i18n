@@ -80,7 +80,6 @@
     "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.4.6",
     "nprogress": "^0.2.0",
-    "octokit": "^3.1.0",
     "openai": "^6.32.0",
     "pg": "^8.12.0",
     "postcss": "^8.5",
@@ -115,7 +114,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@octokit/types": "^11.1.0",
     "@playwright/test": "^1.45.1",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/jest": "^29.5.12",
