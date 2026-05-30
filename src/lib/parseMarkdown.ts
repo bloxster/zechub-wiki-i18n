@@ -1,12 +1,28 @@
 
 export function parseMarkdown(md: string) {
-  const cleanedMd = md
+  const sections = md
     .split('\n')
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .join('\n');
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .reduce<string[]>((acc, line) => {
+      if (line === '---') {
+        return acc;
+      }
 
-  const items = cleanedMd.split('---').map((section: string) => {
+      if (line.startsWith('## [')) {
+        acc.push(line);
+        return acc;
+      }
+
+      if (acc.length === 0) {
+        return acc;
+      }
+
+      acc[acc.length - 1] = `${acc[acc.length - 1]}\n${line}`;
+      return acc;
+    }, []);
+
+  const items = sections.map((section: string) => {
     const lines = section.trim().split('\n');
     let title = '';
     let url = '';
@@ -27,7 +43,7 @@ export function parseMarkdown(md: string) {
         }
       }
       else if (line.includes('![logo]')) {
-        const match = line.match(/!\[logo\]\((.*?) /);
+        const match = line.match(/!\[logo\]\((\S+)(?:\s+["'][^)]*["'])?\)/);
         if (match) imageUrl = match[1];
       }
       else if (line.startsWith('- Devices:')) {
@@ -51,7 +67,7 @@ export function parseMarkdown(md: string) {
         if (value) features.push(...value.split(' | ').map(s => s.trim()));
       }
       else if (line.includes('![syncspeed]')) {
-        const match = line.match(/!\[syncspeed\]\((.*?) /);
+        const match = line.match(/!\[syncspeed\]\((\S+)(?:\s+["'][^)]*["'])?\)/);
         if (match) syncSpeed = match[1];
       }
     });

@@ -24,6 +24,7 @@ const nextConfig = {
       { protocol: "https", hostname: "logos-world.net", pathname: "/**" },
       { protocol: "https", hostname: "logowik.com", pathname: "/**" },
       { protocol: "https", hostname: "www.logo.wine", pathname: "/**" },
+      { protocol: "https", hostname: "leodex.io", pathname: "/**" },
       { protocol: "https", hostname: "upload.wikimedia.org", pathname: "/**" },
       { protocol: "https", hostname: "assets.kraken.com", pathname: "/**" },
       { protocol: "https", hostname: "www.svgrepo.com", pathname: "/**" },
