@@ -66,8 +66,8 @@ const ContentSections = () => {
           "Build, collaborate, and ship impactful ideas with the Zcash community. Compete across five innovative tracks: Infrastructure for nodes and indexers, Games for interactive experiences, FROST for threshold signing, Zcash Login for authentication solutions, and Accounting for financial workflows. May 25 - July 15, 2026. 25 ZEC prize pool awaits."
         }
         image="/hackathon_new.png"
-        imageLight="/explore/light/zechub_hackathon.svg"
-        imageDark="/explore/dark/zechub_hackathon.svg"
+        imageLight="/explore/dark/Hackathon_b.png"
+        imageDark="/explore/light/Hackathon_w.png"
         links={[
           {
             href: "/hackathon",
