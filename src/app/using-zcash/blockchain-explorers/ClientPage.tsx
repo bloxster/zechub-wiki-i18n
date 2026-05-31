@@ -1,15 +1,20 @@
 "use client";
 import ExplorerDirectoryCard from "@/app/using-zcash/blockchain-explorers/ExplorerDirectoryCard";
 import { blockchainExplorers } from "@/constants/blockchainExplorers";
+import { blockchainExplorersIt } from "@/constants/blockchainExplorers.it";
 import { useLanguage } from "@/context/LanguageContext";
 
 const BlockchainExplorersClient = () => {
-  const { t } = useLanguage();
-  const title = t?.pages?.usingZcash?.blockchainExplorers?.title ?? "Blockchain Explorers";
+  const { t, locale } = useLanguage();
+  const be = t?.pages?.usingZcash?.blockchainExplorers;
+  const explorers = locale === "it" ? blockchainExplorersIt : blockchainExplorers;
+  const title = be?.title ?? "Blockchain Explorers";
   const description =
-    t?.pages?.usingZcash?.blockchainExplorers?.description ??
+    be?.description ??
     "A blockchain explorer is a search engine that lets you inspect blocks, transactions, addresses, and network activity across the Zcash ecosystem.";
-  const cta = "Visit Site";
+  const cta = be?.visitSite ?? "Visit Site";
+  const featuresLabel = be?.featuresLabel ?? "Features:";
+  const explorersLabel = be?.explorersLabel ?? "explorers";
 
   return (
     <section className="container mx-auto px-4 py-8 md:py-12">
@@ -24,12 +29,12 @@ const BlockchainExplorersClient = () => {
 
       <div className="mb-6 flex items-center justify-between">
         <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-          {blockchainExplorers.length} explorers
+          {explorers.length} {explorersLabel}
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {blockchainExplorers.map((itm, i) => (
+        {explorers.map((itm, i) => (
           <ExplorerDirectoryCard
             thumbnailImage={itm.thumbnailImage}
             description={itm.description}
@@ -38,6 +43,8 @@ const BlockchainExplorersClient = () => {
             key={i}
             features={itm.features}
             ctaLabel={cta}
+            featuresLabel={featuresLabel}
+            titleCaseFeatures={locale !== "it"}
           />
         ))}
       </div>

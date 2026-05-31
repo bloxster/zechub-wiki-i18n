@@ -361,7 +361,13 @@
       "custodial": "Custodial Exchanges"
     },
     "usingZcash": {
-      "blockchainExplorers": { "title": "Blockchain Explorers" }
+      "blockchainExplorers": {
+        "title": "Blockchain Explorers",
+        "description": "A blockchain explorer is a search engine that lets you inspect blocks, transactions, addresses, and network activity across the Zcash ecosystem.",
+        "visitSite": "Visit Site",
+        "featuresLabel": "Features:",
+        "explorersLabel": "explorers"
+      }
     },
     "dashboard": {
       "title": "Dashboard | ZecHub",

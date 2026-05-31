@@ -10,6 +10,8 @@ type ExplorerDirectoryCardProps = {
   thumbnailImage: string;
   ctaLabel: string;
   features?: string[];
+  featuresLabel?: string;
+  titleCaseFeatures?: boolean;
 };
 
 export default function ExplorerDirectoryCard({
@@ -19,6 +21,8 @@ export default function ExplorerDirectoryCard({
   thumbnailImage,
   ctaLabel,
   features = [],
+  featuresLabel = "Features:",
+  titleCaseFeatures = true,
 }: ExplorerDirectoryCardProps) {
   return (
     <article className="group h-full rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl dark:border-zinc-700 dark:bg-slate-800">
@@ -46,7 +50,7 @@ export default function ExplorerDirectoryCard({
 
         {features.length > 0 && (
           <div className="mb-5">
-            <h4 className="mb-2 font-semibold text-zinc-500">Features:</h4>
+            <h4 className="mb-2 font-semibold text-zinc-500">{featuresLabel}</h4>
             <ul
               className={
                 title === "Bitquery"
@@ -56,7 +60,7 @@ export default function ExplorerDirectoryCard({
             >
             {features.map((feature, index) => (
               <li key={`${title}-${feature}-${index}`}>
-                {formatString.titleCase(feature)}
+                {titleCaseFeatures ? formatString.titleCase(feature) : feature}
               </li>
             ))}
             </ul>
