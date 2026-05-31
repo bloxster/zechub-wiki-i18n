@@ -149,7 +149,7 @@
         "link": "Scopri gli ambasciatori"
       },
       "newsletter": {
-        "title": "Newsletter Shielded",
+        "title": "Shielded Newsletter",
         "description": "Iscriviti con il tuo Unified Address per ricevere nel wallet, in modo schermato, aggiornamenti sull'ecosistema Zcash e statistiche della rete.",
         "link": "Iscriviti"
       },
@@ -176,17 +176,17 @@
       "dismiss": "Chiudi"
     },
     "explore": {
-      "startHere": "Inizia_da_Qui",
+      "startHere": "Inizia da Qui",
       "tutorials": "Tutorial",
-      "usingZcash": "Usare_Zcash",
+      "usingZcash": "Usare Zcash",
       "guides": "Guide",
-      "zcashTech": "Tecnologia_Zcash",
-      "organizations": "Organizzazioni_Zcash",
-      "community": "Community_Zcash",
-      "zkavClub": "ZKAV_Club",
-      "privacyTools": "Strumenti_Privacy",
+      "zcashTech": "Tecnologia Zcash",
+      "organizations": "Organizzazioni Zcash",
+      "community": "Community Zcash",
+      "zkavClub": "ZKAV Club",
+      "privacyTools": "Strumenti per la Privacy",
       "research": "Ricerca",
-      "glossary": "Glossario_e_FAQ",
+      "glossary": "Glossario e FAQ",
       "contribute": "Contribuisci"
     }
   },

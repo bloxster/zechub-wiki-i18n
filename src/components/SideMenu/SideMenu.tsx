@@ -62,6 +62,14 @@ const SideMenu = ({ folder, roots }: MenuProps) => {
       "Zcash Community": t.navigation?.zcashCommunity?.label,
       "Zcash Organizations": t.navigation?.organizations?.label,
       "Zcash Tech": locale === "it" ? "Tecnologia Zcash" : "Zcash Tech",
+      "Start Here": locale === "it" ? "Inizia da Qui" : fold,
+      "Privacy Tools": locale === "it" ? "Strumenti per la Privacy" : fold,
+      "Guides": locale === "it" ? "Guide" : fold,
+      "Tutorials": locale === "it" ? "Tutorial" : fold,
+      "Research": locale === "it" ? "Ricerca" : fold,
+      "Glossary & FAQ's": locale === "it" ? "Glossario e FAQ" : fold,
+      "Zcash Use Cases": locale === "it" ? "Casi d'uso di Zcash" : fold,
+      "Contribute": locale === "it" ? "Contribuisci" : fold,
     }[fold] ?? fold;
   const itemLabel = (itemName: string) =>
     ({

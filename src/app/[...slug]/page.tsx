@@ -35,6 +35,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   const locale = await getRequestLocale();
   const dictionary = (await getDictionary(locale)) as {
     pages?: { folder?: { browse?: string } };
+    home?: { explore?: Record<string, string> };
   };
   let slug: string[] = [];
   try {
@@ -94,6 +95,26 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   }
 
   if (!markdown) {
+    const exploreKey = (
+      {
+        "start-here": "startHere",
+        "tutorials": "tutorials",
+        "using-zcash": "usingZcash",
+        "guides": "guides",
+        "zcash-tech": "zcashTech",
+        "zcash-organizations": "organizations",
+        "zcash-community": "community",
+        "zkav-club": "zkavClub",
+        "privacy-tools": "privacyTools",
+        "research": "research",
+        "glossary-and-faqs": "glossary",
+        "contribute": "contribute",
+      } as Record<string, string>
+    )[slug[0]];
+    const folderTitle =
+      exploreKey && dictionary.home?.explore?.[exploreKey]
+        ? dictionary.home.explore[exploreKey].replace(/_/g, " ")
+        : slug[0].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
     return (
       <MdxContainer
         hasSideMenu={showSideMenu}
@@ -102,9 +123,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
         heroImage={{ src: imgUrl, darkSrc: imgUrlDark }}
       >
         <div className="px-6 py-12 text-center">
-          <h1 className="text-5xl font-bold mb-6 capitalize">
-            {slug[0].replace(/-/g, " ")}
-          </h1>
+          <h1 className="text-5xl font-bold mb-6">{folderTitle}</h1>
           <p className="text-xl text-muted-foreground">
             {dictionary.pages?.folder?.browse ?? "Browse the articles using the sidebar on the left"}
           </p>

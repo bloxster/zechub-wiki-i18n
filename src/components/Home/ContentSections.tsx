@@ -66,31 +66,13 @@ const ContentSections = () => {
           "Build, collaborate, and ship impactful ideas with the Zcash community. Compete across five innovative tracks: Infrastructure for nodes and indexers, Games for interactive experiences, FROST for threshold signing, Zcash Login for authentication solutions, and Accounting for financial workflows. May 25 - July 15, 2026. 25 ZEC prize pool awaits."
         }
         image="/hackathon_new.png"
-        imageLight="/explore/dark/zechub_hackathon.svg"
-        imageDark="/explore/light/zechub_hackathon.svg"
+        imageLight="/explore/light/zechub_hackathon.svg"
+        imageDark="/explore/dark/zechub_hackathon.svg"
         links={[
           {
             href: "/hackathon",
             label:
               t.home?.sections?.hackathon?.mainLink || "Join the Hackathon",
-            primary: true,
-          },
-        ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
-      />
-      <InfoCard
-        id="zcash-me"
-        title={t.home?.sections?.zcashMe?.title || "Zcash.me"}
-        description={
-          t.home?.sections?.zcashMe?.description ||
-          "Zcash.Me is a public directory of Zcash users featuring private messaging, leaderboards, and verified users. Connect, explore, and interact with the Zcash community."
-        }
-        image="/Zcash-me.png"
-        imageLight="/Zcash-me.png"
-        imageDark="/Zcash-me.png"
-        links={[
-          {
-            href: "https://zcash.me",
-            label: t.home?.sections?.zcashMe?.link || "Visit Zcash.Me",
             primary: true,
           },
         ].map((link) => ({ ...link, href: localizedPath(link.href, locale) }))}
