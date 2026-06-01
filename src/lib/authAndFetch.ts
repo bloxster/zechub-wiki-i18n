@@ -86,9 +86,36 @@ export async function getLocalizedFileContentCached(
   locale: Locale,
 ) {
   if (locale === "it") {
-    const translated = await getFileContentCached(`/translations/it${path}`);
+    const itPath = `/translations/it${path}`;
+    const translated = await getFileContentCached(itPath);
     if (translated) {
       return translated;
+    }
+    // Direct fuzzy fallback within the localized folder. getFileContentCached's
+    // own fuzzy path routes through getRootCached -> transformUri, which mangles
+    // the "/translations/it" prefix, so nested/oddly-cased pages (e.g.
+    // Spend_Zcash/Top_10_Places_to_spend_ZEC) silently fall back to English.
+    // Read the IT folder directly and slug-match instead.
+    try {
+      const dir = itPath.split("/").slice(0, -1).join("/");
+      const entries = await fs.readdir(resolveContentPath(dir), {
+        withFileTypes: true,
+      });
+      const wantSlug = normalize(
+        itPath.split("/").pop()?.replace(/\.md$/i, "") || "",
+      );
+      for (const e of entries) {
+        if (!e.isFile() || !e.name.endsWith(".md")) continue;
+        const n = normalize(e.name.replace(/\.md$/i, ""));
+        if (n === wantSlug || n.includes(wantSlug)) {
+          return await fs.readFile(
+            resolveContentPath(`${dir}/${e.name}`),
+            "utf-8",
+          );
+        }
+      }
+    } catch {
+      // fall through to English
     }
   }
 
