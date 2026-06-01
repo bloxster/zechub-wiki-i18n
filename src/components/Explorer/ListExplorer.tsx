@@ -3,6 +3,8 @@ import { getName } from "@/lib/helpers";
 import Image from "next/image";
 import Link from "next/link";
 import { useDarkModeContext } from "@/hooks/useDarkModeContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { localizedPath } from "@/lib/localizedPath";
 
 interface Props {
   image: string;
@@ -25,14 +27,16 @@ const CardsExplorer = ({
   ...props
 }: Props) => {
   const { dark } = useDarkModeContext();
+  const { locale } = useLanguage();
   const src =
     dark && imageDark ? imageDark : !dark && imageLight ? imageLight : image;
+  const href = localizedPath(url, locale);
 
   return (
     <div
       className={`w-4/6  hover:bg-gray-100 dark:hover:bg-transparent hover:cursor-pointer hover:scale-105 transition-all duration-100 ${className}`}
     >
-      <Link href={url}>
+      <Link href={href}>
         <Image
           className="rounded-t-lg"
           src={src}

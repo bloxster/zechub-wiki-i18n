@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   type ReactNode,
 } from 'react';
@@ -43,6 +44,16 @@ export function LanguageProvider({
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!pathname || initialLocale !== 'it') return;
+    if (pathname === '/it' || pathname.startsWith('/it/')) return;
+    if (pathname.startsWith('/api') || pathname.startsWith('/_next')) return;
+
+    const nextPath = localizedPath(pathname, initialLocale);
+    const query = searchParams?.toString() ?? '';
+    window.location.replace(query ? `${nextPath}?${query}` : nextPath);
+  }, [initialLocale, pathname, searchParams]);
 
   const setLocale = useCallback(
     (locale: Locale) => {

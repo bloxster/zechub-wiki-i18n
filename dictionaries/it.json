@@ -127,11 +127,6 @@
       }
     },
     "sections": {
-      "hackathon": {
-        "title": "Partecipa all'Hackathon",
-        "description": "Sviluppa e collabora con la community Zcash su infrastruttura, giochi, FROST, Zcash Login e contabilità. Dal 25 maggio al 15 luglio 2026, con un montepremi di 25 ZEC.",
-        "mainLink": "Partecipa all'Hackathon"
-      },
       "whatIsZcash": {
         "title": "Che cos'è Zcash?",
         "description": "Zcash è un registro blockchain open source dotato di un sofisticato sistema di prove a conoscenza zero. Offre un livello superiore di privacy preservando la riservatezza dei metadati delle transazioni. Nella sua essenza, Zcash è proprietà privata dei dati, trasferita in modo permissionless quando si effettuano transazioni.",
@@ -164,16 +159,6 @@
         "mainLink": "paywithz.cash",
         "mapLink": "SPEDN"
       }
-    },
-    "hackathonBanner": {
-      "live": "In corso",
-      "title": "ZecHub Hackathon",
-      "description": "Crea applicazioni orientate alla privacy su Zcash. Partecipa per ottenere premi in ZEC e contribuire al futuro della libertà finanziaria.",
-      "prizePool": "Montepremi",
-      "start": "Inizio",
-      "end": "Fine",
-      "learnMore": "Scopri di più",
-      "dismiss": "Chiudi"
     },
     "explore": {
       "startHere": "Inizia da Qui",

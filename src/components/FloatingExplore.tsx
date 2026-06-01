@@ -7,11 +7,14 @@ import Link from "next/link";
 import { Button } from "@/components/UI/button";
 import { exploreMenu } from "@/constants/explore-menu";
 import Image from 'next/image';
+import { useLanguage } from "@/context/LanguageContext";
+import { localizedPath } from "@/lib/localizedPath";
 
 export default function FloatingExplore() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() || "";
   const { dark } = useContext(DarkModeContext) || { dark: false };
+  const { locale } = useLanguage();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -90,7 +93,7 @@ export default function FloatingExplore() {
     setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 80);
   };
 
-  if (pathname === "/explore") return null;
+  if (pathname === "/explore" || pathname === "/it/explore") return null;
 
   return (
     <>
@@ -162,7 +165,7 @@ export default function FloatingExplore() {
             <div className="overflow-y-auto pr-1">
               <div className="space-y-1 mb-4">
                 {exploreMenu.mainLinks.map((item) => {
-                  const href = deepLinkMap[item.label] || item.href;
+                  const href = localizedPath(deepLinkMap[item.label] || item.href, locale);
                   const iconSrc =
                     iconMap[item.label] || `/explore/${folder}/start-here.png`;
 
