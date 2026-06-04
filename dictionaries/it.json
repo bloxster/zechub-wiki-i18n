@@ -200,6 +200,12 @@
     "privacyPolicy": "Informativa sulla privacy",
     "termsOfService": "Termini di servizio"
   },
+  "floatingExplore": {
+    "fullExplore": "Esplora tutto",
+    "forksTitle": "Per fork e maintainer",
+    "forkZechubWiki": "Fai un fork di zechub-wiki",
+    "forkZechub": "Fai un fork di zechub"
+  },
   "visualizer": {
     "title": "Visualizer Zcash",
     "description": "Strumenti educativi interattivi per capire la tecnologia di privacy, l'infrastruttura e le prove a conoscenza zero di Zcash",

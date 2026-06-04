@@ -200,6 +200,12 @@
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
   },
+  "floatingExplore": {
+    "fullExplore": "Full Explore",
+    "forksTitle": "For Forks & Maintainers",
+    "forkZechubWiki": "Fork zechub-wiki",
+    "forkZechub": "Fork zechub"
+  },
   "visualizer": {
     "title": "Zcash Visualizers",
     "description": "Interactive educational tools to understand Zcash privacy technology, infrastructure, and zero-knowledge proofs",
