@@ -17,7 +17,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(rewrittenUrl, { request: { headers } });
   }
 
-  headers.set('x-zechub-locale', 'en');
+  if (!headers.get('x-zechub-locale')) {
+    headers.set('x-zechub-locale', 'en');
+  }
   return NextResponse.next({ request: { headers } });
 }
 

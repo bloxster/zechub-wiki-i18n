@@ -112,6 +112,16 @@
     "getInvolved": "Partecipa",
     "exploreEcosystem": "Esplora l'ecosistema",
     "exploreZcash": "Esplora Zcash",
+    "hackathonBanner": {
+      "live": "In corso",
+      "title": "ZecHub Hackathon",
+      "description": "Sviluppa applicazioni orientate alla privacy su Zcash. Competi per i premi, guadagna ZEC e contribuisci al futuro della libertà finanziaria.",
+      "prizePool": "Montepremi",
+      "start": "Inizio",
+      "end": "Fine",
+      "learnMore": "Scopri di più",
+      "dismiss": "Chiudi"
+    },
     "cards": {
       "startHere": {
         "title": "Inizia da qui",
@@ -158,6 +168,11 @@
         "description": "Questo sito risponde alla domanda: dove posso pagare con Zcash? La directory è gratuita. Le voci elencate hanno scopo puramente informativo e non costituiscono raccomandazioni di alcun tipo. Buona esplorazione!",
         "mainLink": "paywithz.cash",
         "mapLink": "SPEDN"
+      },
+      "hackathon": {
+        "title": "Partecipa all'Hackathon",
+        "description": "Sviluppa, collabora e realizza idee utili insieme alla community Zcash. Competi in cinque track innovative: infrastruttura per nodi e indexer, giochi, FROST per la firma a soglia, Zcash Login per soluzioni di autenticazione e accounting per workflow finanziari. 25 maggio - 15 luglio 2026. In palio un montepremi da 25 ZEC.",
+        "mainLink": "Partecipa all'Hackathon"
       }
     },
     "explore": {
